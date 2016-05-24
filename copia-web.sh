@@ -4,7 +4,7 @@
 # 0.1 160517 version inicial
 # 0.2 160523 soporte wordpress com BD automatica
 # 0.3 160523 si no se especifica el segundo parametro, comprueba si es un wordpress
-
+# 0.3.1 160524 solucionado bug en el grep del wp-config.php
 
 WEBROOT='/var/www/htdocs'
 DIRCOPIAS='/root/copias-web'
@@ -26,7 +26,7 @@ then   # Si es un wordpress averiguar el nombre de la BD del wp-config.php
    if [ -f $WEBROOT/$1/wp-config.php ]
    then
       echo -e "Es un WordPress."
-      DBNAME=`grep 'DB_NAME' $1/wp-config.php |cut -d "'" -f 4`
+      DBNAME=`grep 'DB_NAME' $WEBROOT/$1/wp-config.php |cut -d "'" -f 4`
    else
       echo -e "No es un WordPress. No se copia la BD porque no se ha especificado."
    fi
